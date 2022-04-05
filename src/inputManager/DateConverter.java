@@ -1,6 +1,7 @@
 package inputManager;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import exceptions.InvalidDateFormatException;
@@ -24,9 +25,9 @@ public class DateConverter {
      * @return
      * @throws InvalidDateFormatException
      */
-    public static LocalDateTime parseLocalDate(String s) throws InvalidDateFormatException{
+    public static LocalTime parseLocalDate(String s) throws InvalidDateFormatException{
         try{
-            return LocalDateTime.parse(s, localDateFormatter);
+            return LocalTime.parse(s, localDateFormatter);
         }
         catch(java.time.format.DateTimeParseException e){
             throw new InvalidDateFormatException();

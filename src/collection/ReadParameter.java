@@ -77,7 +77,7 @@ public class ReadParameter {
         return z;
     }
 
-    public java.time.LocalDateTime convertToCreationTime(String s) throws InvalidDateFormatException {
+    public java.time.LocalTime convertToCreationTime(String s) throws InvalidDateFormatException {
         return DateConverter.parseLocalDate(s);
     }
 

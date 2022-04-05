@@ -206,7 +206,7 @@ public class CommandExecutor {
         if(history.isEmpty()){
             System.out.println("History is empty");
         }else{
-            for(int i = history.size()-1;(i>=0)||(i>history.size()-7);i--){
+            for(int i = history.size()-1;(i>=0)&&(i>history.size()-7);i--){
                 System.out.println(history.get(i));
             }
         }

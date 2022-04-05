@@ -36,7 +36,7 @@ public class InputAll {
     public Person readPerson() throws ParameterException {
         String name = readName();
         Coordinates coordinates = readCoordinates();
-        java.time.LocalDateTime createTime = readCreateTime();
+        java.time.LocalTime createTime = readCreateTime();
         double height = readHeight();
         long weight = readWeight();
         Color hairColor = readHairColor();
@@ -91,7 +91,7 @@ public class InputAll {
         }
     }
 
-    public java.time.LocalDateTime readCreateTime() throws InvalidDateFormatException{
+    public java.time.LocalTime readCreateTime() throws InvalidDateFormatException{
         String s = scanner.nextLine().trim();
         if(s.equals("")){
             return null;

@@ -14,7 +14,7 @@ public class Main {
         String path = "MICHELLE";
         fileWorker.setPath(path);
         if(!personCollection.deserializeCollection(fileWorker.read())){
-            System.out.println("В файле ошибка, элементы не были добавлены в коллекцию");
+            System.out.println("In the fail is a error");
             personCollection.clear();
         }
         InputAll console = new ConsoleInput();

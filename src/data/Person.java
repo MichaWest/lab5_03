@@ -1,6 +1,7 @@
 package data;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,7 +9,7 @@ public class Person{
     private Integer id;
     private String name;
     private Coordinates coordinates;
-    private java.time.LocalDateTime creationDate;
+    private java.time.LocalTime creationDate;
     private Double height;
     private Long weight;
     private Color hairColor;
@@ -16,13 +17,13 @@ public class Person{
     private Location location;
 
     public Person(){
-        this.creationDate =LocalDateTime.now();
+        this.creationDate = LocalTime.now();
     }
 
-    public Person(String n, Coordinates c, java.time.LocalDateTime cd, double h, long w, Color hc, Country nation, Location l ){
+    public Person(String n, Coordinates c, java.time.LocalTime cd, double h, long w, Color hc, Country nation, Location l ){
         name = n;
         coordinates = c;
-        creationDate = cd;
+        creationDate =cd;
         height = h;
         weight = w;
         hairColor = hc;
@@ -30,7 +31,7 @@ public class Person{
         location = l;
     }
 
-    public boolean addCreationDate(java.time.LocalDateTime cd){
+    public boolean addCreationDate(java.time.LocalTime cd){
         if(cd!=null){
             this.creationDate =cd;
             return true;
@@ -159,7 +160,7 @@ public class Person{
         return coordinates;
     }
 
-    public java.time.LocalDateTime getCreationDate(){
+    public java.time.LocalTime getCreationDate(){
         return creationDate;
     }
 

@@ -18,10 +18,14 @@ public class PersonCollection {
     public PersonCollection(){
         createTime = LocalDateTime.now();
         order = true;
+        if(collection==null){
+            collection = new Vector<>();
+        }
     }
 
     public boolean deserializeCollection(String xml){
         ArrayList<String[]> col;
+        System.out.println(xml);
         try{
             if(xml==null||xml.isEmpty()){
                 collection = new Vector<>();
@@ -41,6 +45,7 @@ public class PersonCollection {
                     if(!man.addCoordinates(getParameter.convertToCX(parameter[6]), getParameter.convertToCY(parameter[7]))) throw new ParameterException("Координаты указаны неправильно");
                     if(!man.addLocation(getParameter.convertToLX(parameter[8]), getParameter.convertToLY(parameter[9]), getParameter.convertToLZ(parameter[10]))) throw new ParameterException("Локация указана неправильно");
                     collection.add(man);
+                    System.out.println("Great add person "+man.getName());
                 }
             }
         }catch(ParameterException e){
@@ -71,7 +76,7 @@ public class PersonCollection {
     }
 
     public String getInfo(){
-        return "Vector of Person, size: "+collection.size()+", create time: "+ this.createTime;
+        return "Vector of Person, size: "+collection.size()+", create time: "+ DateConverter.dateToString(this.createTime);
     }
 
     public Vector<Person> getCollection(){
@@ -106,7 +111,7 @@ public class PersonCollection {
 
     public void add(Person p){
         p.addId(generateNextId());
-        if(collection.isEmpty()) {
+        if((collection==null)||collection.isEmpty()) {
             collection.add(p);
         }else{
             for(int i=0;i<collection.size();i++){
@@ -133,6 +138,7 @@ public class PersonCollection {
     public Person getById(int i){
         for(Person p: collection){
             if(p.getId() == i){
+                System.out.println(p.getName());
                 return p;
             }
         }
