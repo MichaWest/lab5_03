@@ -1,6 +1,7 @@
 package collection;
 
 import exceptions.InvalidDateFormatException;
+import inputManager.DateConverter;
 
 import static inputManager.DateConverter.parseLocalDate;
 
@@ -77,7 +78,7 @@ public class ReadParameter {
     }
 
     public java.time.LocalDateTime convertToCreationTime(String s) throws InvalidDateFormatException {
-        return parseLocalDate(s);
+        return DateConverter.parseLocalDate(s);
     }
 
 }

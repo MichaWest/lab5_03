@@ -97,7 +97,7 @@ public class InputAll {
             return null;
         }
         else{
-            return parseLocalDate(s);
+            return DateConverter.parseLocalDate(s);
         }
     }
 

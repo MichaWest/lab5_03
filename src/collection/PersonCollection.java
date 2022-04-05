@@ -2,13 +2,16 @@ package collection;
 
 import data.*;
 import exceptions.*;
+import inputManager.DateConverter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class PersonCollection {
     private Vector<Person> collection;
     private final java.time.LocalDateTime createTime;
+    private static final DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     private HashSet<Integer> existId;
     private boolean order;
 
@@ -16,6 +19,7 @@ public class PersonCollection {
         createTime = LocalDateTime.now();
         order = true;
     }
+
     public boolean deserializeCollection(String xml){
         ArrayList<String[]> col;
         try{
@@ -203,4 +207,10 @@ public class PersonCollection {
         }
         collection = rcol;
     }
+
+    public java.time.LocalDateTime getTime(){
+        return this.createTime;
+    }
+
 }
+

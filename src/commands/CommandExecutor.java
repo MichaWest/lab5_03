@@ -30,16 +30,15 @@ public class CommandExecutor {
             history.add("help");
         });
         addCommand("info",(a)-> {
+            if (collection.getCollection()==null) throw new EmptyCollectionException();
+            if (collection.getCollection().isEmpty()) throw new EmptyCollectionException();
             System.out.println(collection.getInfo());
             history.add("info");
         });
         addCommand("show", (a)->{
-            if (collection.getCollection().isEmpty()){
-                System.out.println("collection is empty");
-            }
-            else {
-                System.out.println(collection.serializeCollection());
-            }
+            if (collection.getCollection()==null) throw new EmptyCollectionException();
+            if (collection.getCollection().isEmpty()) throw new EmptyCollectionException();
+            System.out.println(collection.serializeCollection());
             history.add("show");
         });
         addCommand("add", (a)->{
@@ -149,8 +148,9 @@ public class CommandExecutor {
     public void consoleMode(){
         input = new ConsoleInput();
         run = true;
+        System.out.println(DateConverter.dateToString(collection.getTime()));
         while(run){
-            System.out.print("Enter command (enter help to get list command");
+            System.out.print("Enter command (enter help to get list command: ");
             CommandWrapper cmd = input.readCommand();
             runCommand(cmd.getCom(), cmd.getArg());
         }
