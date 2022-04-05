@@ -25,7 +25,6 @@ public class PersonCollection {
 
     public boolean deserializeCollection(String xml){
         ArrayList<String[]> col;
-        System.out.println(xml);
         try{
             if(xml==null||xml.isEmpty()){
                 collection = new Vector<>();
@@ -37,15 +36,15 @@ public class PersonCollection {
                     ReadParameter getParameter = new ReadParameter();
                     man.addId(this.generateNextId());
                     if(!man.addName(parameter[0])) throw new ParameterException("Указаеа пустая строка");
-                    if(!man.addCreationDate(getParameter.convertToCreationTime(parameter[1]))) throw new ParameterException("Время указано неправльно");
-                    if(!man.addHeight(getParameter.convertToHeight(parameter[2]))) throw new ParameterException("Высота указана неправильно");
-                    if(!man.addWeight(getParameter.convertToWeight(parameter[3]))) throw new ParameterException("Вес указан неправильно");
-                    if(!man.addColor(parameter[4])) throw new ParameterException("Цвет указан неправильно. Существуют только слудующие цвета: Red, Yellow, Brown");
-                    if(!man.addNationality(parameter[5])) throw new ParameterException("Национальность указана неправильно. Существуют только следующие национальности: USA, China, Vatican, North_Korea, Japan");
-                    if(!man.addCoordinates(getParameter.convertToCX(parameter[6]), getParameter.convertToCY(parameter[7]))) throw new ParameterException("Координаты указаны неправильно");
-                    if(!man.addLocation(getParameter.convertToLX(parameter[8]), getParameter.convertToLY(parameter[9]), getParameter.convertToLZ(parameter[10]))) throw new ParameterException("Локация указана неправильно");
+                    if(!man.addId(getParameter.convertToId(parameter[1]))) throw new ParameterException("Указаеа пустая строка");
+                    if(!man.addCreationDate(getParameter.convertToCreationTime(parameter[3]))) throw new ParameterException("Время указано неправльно");
+                    if(!man.addHeight(getParameter.convertToHeight(parameter[4]))) throw new ParameterException("Высота указана неправильно");
+                    if(!man.addWeight(getParameter.convertToWeight(parameter[5]))) throw new ParameterException("Вес указан неправильно");
+                    if(!man.addColor(parameter[6])) throw new ParameterException("Цвет указан неправильно. Существуют только слудующие цвета: Red, Yellow, Brown");
+                    if(!man.addNationality(parameter[7])) throw new ParameterException("Национальность указана неправильно. Существуют только следующие национальности: USA, China, Vatican, North_Korea, Japan");
+                    if(!man.addCoordinates(getParameter.convertToCX(parameter[9]), getParameter.convertToCY(parameter[10]))) throw new ParameterException("Координаты указаны неправильно");
+                    if(!man.addLocation(getParameter.convertToLX(parameter[11]), getParameter.convertToLY(parameter[12]), getParameter.convertToLZ(parameter[13]))) throw new ParameterException("Локация указана неправильно");
                     collection.add(man);
-                    System.out.println("Great add person "+man.getName());
                 }
             }
         }catch(ParameterException e){

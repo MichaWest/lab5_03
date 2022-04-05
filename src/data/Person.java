@@ -1,6 +1,5 @@
 package data;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,9 +39,9 @@ public class Person{
         }
     }
 
-    public void addId(int newId){
+    public boolean addId(int newId){
         this.id = newId;
-        //return true;
+        return true;
     }
 
     public boolean addName(String newName){

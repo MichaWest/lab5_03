@@ -51,7 +51,7 @@ public class ReadParameter {
         double x = 0;
         try{
             x =Double.parseDouble(s);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException|NullPointerException  e) {
             System.out.println(e.getMessage());
         }
         return x;
@@ -71,7 +71,7 @@ public class ReadParameter {
         double z = 0;
         try{
             z =Double.parseDouble(s);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException|NullPointerException e) {
             System.out.println(e.getMessage());
         }
         return z;
@@ -79,6 +79,15 @@ public class ReadParameter {
 
     public java.time.LocalTime convertToCreationTime(String s) throws InvalidDateFormatException {
         return DateConverter.parseLocalDate(s);
+    }
+    public int convertToId (String s){
+        int i = 0;
+        try{
+            i =Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+        return i;
     }
 
 }

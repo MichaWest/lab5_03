@@ -22,7 +22,7 @@ public class Xml {
             String[] tags = new String[]{"name","id", "coordinates", "creationDate", "height", "weight", "hairColor", "nationality", "location"};
             int counter = document.getDocumentElement().getElementsByTagName("Person").getLength();
             for (int k = 0; k < counter; k++) {
-                String[] values = new String[13];
+                String[] values = new String[14];
                 for (int i = 0; i < tags.length; i++) {
                     try {
                         if ((i != 2) && (i != 8)) {
@@ -35,15 +35,15 @@ public class Xml {
                                     String[] tagsCoordinates = new String[]{"x", "y"};
                                     NodeList personElements = document.getDocumentElement().getElementsByTagName(tagsCoordinates[nc]);
                                     String value = personElements.item(k).getFirstChild().toString();
-                                    values[7 + nc] = value.substring(8, value.length() - 1);
+                                    values[9 + nc] = value.substring(8, value.length() - 1);
                                 }
                             }
-                            if (i == 8) {
+                            if (i ==8) {
                                 for (int nl = 0; nl < 3; nl++) {
-                                    String[] tagsLocation = new String[]{"xl", "yl", "zl"};
+                                    String[] tagsLocation = new String[]{"lx", "ly", "lz"};
                                     NodeList personElements = document.getDocumentElement().getElementsByTagName(tagsLocation[nl]);
                                     String value = personElements.item(k).getFirstChild().toString();
-                                    values[9 + nl] = value.substring(8, value.length() - 1);
+                                    values[11 + nl] = value.substring(8, value.length() - 1);
                                 }
                             }
                         }
@@ -51,9 +51,6 @@ public class Xml {
                     } catch (NullPointerException e) {
                         values[i] = "null";
                     }
-                }
-                for(int i=3;i<12;i++){
-                    values[i-1]=values[i];
                 }
                 returnArray.add(values);
             }
