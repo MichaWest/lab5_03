@@ -42,7 +42,7 @@ public class PersonCollection {
                     if(!man.addNationality(parameter[7])) throw new ParameterException("Национальность указана неправильно. Существуют только следующие национальности: USA, China, Vatican, North_Korea, Japan");
                     if(!man.addCoordinates(getParameter.convertToCX(parameter[9]), getParameter.convertToCY(parameter[10]))) throw new ParameterException("Координаты указаны неправильно");
                     if(!man.addLocation(getParameter.convertToLX(parameter[11]), getParameter.convertToLY(parameter[12]), getParameter.convertToLZ(parameter[13]))) throw new ParameterException("Локация указана неправильно");
-                    collection.add(man);
+                    add(man, man.getId());
                 }
             }
         }catch(ParameterException e){
@@ -91,7 +91,11 @@ public class PersonCollection {
     }
 
     public void add(Person p){
-        p.addId(generateNextId());
+        add(p, generateNextId());
+    }
+
+    public void add(Person p, int id){
+        p.addId(id);
         if(collection.isEmpty()) {
             collection.add(p);
         }else{

@@ -78,7 +78,7 @@ public class FileWorker {
                 create(file);
             }
             if(!file.canWrite()) throw new FileWrongPermissionsException("cannot write file");
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            PrintWriter writer = new PrintWriter(new FileWriter(file));
             writer.write(str);
             writer.close();
         } catch(FileException e){

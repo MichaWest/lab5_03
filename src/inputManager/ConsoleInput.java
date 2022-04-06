@@ -71,13 +71,13 @@ public class ConsoleInput extends InputAll{
 
     @Override
     public Color readHairColor() throws InvalidEnumException {
-        System.out.print("enter hair color: ");
+        System.out.print("enter hair color (RED, BROWN, YELLOW): ");
         return super.readHairColor();
     }
 
     @Override
     public Country readNationality() throws InvalidEnumException {
-        System.out.print("enter nationality: ");
+        System.out.print("enter nationality (USA, CHINA, VATICAN, NORTH_KOREA, JAPAN): ");
         return super.readNationality();
     }
 

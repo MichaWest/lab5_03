@@ -3,8 +3,6 @@ package collection;
 import exceptions.InvalidDateFormatException;
 import inputManager.DateConverter;
 
-import static inputManager.DateConverter.parseLocalDate;
-
 public class ReadParameter {
 
     public float convertToCX(String s){
