@@ -80,6 +80,7 @@ public class ReadParameter {
     public java.time.LocalTime convertToCreationTime(String s) throws InvalidDateFormatException {
         return DateConverter.parseLocalDate(s);
     }
+
     public int convertToId (String s){
         int i = 0;
         try{

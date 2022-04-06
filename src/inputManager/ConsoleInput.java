@@ -77,7 +77,7 @@ public class ConsoleInput extends InputAll{
 
     @Override
     public Country readNationality() throws InvalidEnumException {
-        System.out.print("enter nationality color: ");
+        System.out.print("enter nationality: ");
         return super.readNationality();
     }
 

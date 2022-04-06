@@ -15,7 +15,7 @@ public class DateConverter {
     /**
      * convert LocalDate to String
      */
-    public static String dateToString(LocalDateTime date){
+    public static String dateToString(LocalTime date){
         return date.format(localDateFormatter);
     }
 

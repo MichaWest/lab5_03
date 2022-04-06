@@ -4,19 +4,17 @@ import data.*;
 import exceptions.*;
 import inputManager.DateConverter;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
 import java.util.*;
 
 public class PersonCollection {
     private Vector<Person> collection;
-    private final java.time.LocalDateTime createTime;
-    private static final DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private final java.time.LocalTime createTime;
     private HashSet<Integer> existId;
     private boolean order;
 
     public PersonCollection(){
-        createTime = LocalDateTime.now();
+        createTime = LocalTime.now();
         order = true;
         if(collection==null){
             collection = new Vector<>();
@@ -83,34 +81,18 @@ public class PersonCollection {
     }
 
     public String serializeCollection(){
-        String text = "";
+        String text = "<People>\n";
+        Xml parse = new Xml();
         for (Person man : collection) {
-            text =text+"<People>\n" +
-                    "  <Person>\n" +
-                    "       <name>" + man.getName() + "</name>\n" +
-                    "       <id>" + man.getId() + "</id>\n" +
-                    "       <coordinates>\n" +
-                    "           <x>" + man.getCoordinates().getX() + "</x>\n" +
-                    "           <y>" + man.getCoordinates().getY() + "</y>\n" +
-                    "       <coordinates>\n" +
-                    "       <creationDate>" + man.getCreationDate() + "</creationDate>\n" +
-                    "       <height>" + man.getHeight() + "</height>\n" +
-                    "       <weight>" + man.getWeight() + "</weight>\n" +
-                    "       <hairColor>" + man.getHairColor()+ "</hairColor>\n" +
-                    "       <nationality>" + man.getNationality() + "</nationality>\n" +
-                    "       <location>\n" +
-                    "           <lx>" + man.getLocation().getX() + "</lx>\n" +
-                    "           <ly>" + man.getLocation().getY() + "</ly>\n" +
-                    "           <lz>" + man.getLocation().getZ() + "</lz>\n" +
-                    "   </Person>\n" +
-                    "</People>\n";
+            text = text + parse.strToXml(man);
         }
+        text = text + "</People>";
         return text;
     }
 
     public void add(Person p){
         p.addId(generateNextId());
-        if((collection==null)||collection.isEmpty()) {
+        if(collection.isEmpty()) {
             collection.add(p);
         }else{
             for(int i=0;i<collection.size();i++){
@@ -125,9 +107,12 @@ public class PersonCollection {
                         break;
                     }
                 }
+                if(i==collection.size()-1){
+                    collection.add(p);
+                    break;
+                }
             }
         }
-        System.out.println("Added element:"+p);
     }
 
     public boolean checkId(int i){
@@ -145,6 +130,7 @@ public class PersonCollection {
     }
 
     public void removeById(int i){
+        System.out.println("removeById");
         collection.removeElement(getById(i));
     }
 
@@ -152,7 +138,7 @@ public class PersonCollection {
         for (Person p : collection){
             if (p.getId() == id){
                 newp.addId(id);
-                collection.set(id, newp);
+                collection.set(collection.indexOf(getById(id)), newp);
                 System.out.println("element #"+ id +" successfully updated");
                 return;
             }
@@ -213,9 +199,6 @@ public class PersonCollection {
         collection = rcol;
     }
 
-    public java.time.LocalDateTime getTime(){
-        return this.createTime;
-    }
 
 }
 

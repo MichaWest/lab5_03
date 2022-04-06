@@ -56,7 +56,7 @@ public class CommandExecutor {
                 throw new InvalidCommandArgumentException("id should be Integer");
             }
             if (collection.getCollection().isEmpty()) throw new EmptyCollectionException();
-            if (collection.checkId(id)) throw new InvalidCommandArgumentException("no such id");
+            if (!collection.checkId(id)) throw new InvalidCommandArgumentException("no such id");
             collection.removeById(id);
             history.add("remove_by_id");
         });
@@ -71,7 +71,7 @@ public class CommandExecutor {
                 throw new InvalidCommandArgumentException("id must be integer");
             }
             if (collection.getCollection().isEmpty()) throw new EmptyCollectionException();
-            if (collection.checkId(id)) throw new InvalidCommandArgumentException("no such id");
+            if (!collection.checkId(id)) throw new InvalidCommandArgumentException("no such id");
 
             collection.updateById(id, input.readPerson());
             history.add("update_by_id "+arg);
@@ -116,7 +116,7 @@ public class CommandExecutor {
         });
         addCommand("min_by_weight",(a)->{
             if (collection.getCollection().isEmpty()) throw new EmptyCollectionException();
-            System.out.println(collection.minByWeight());
+            System.out.println(collection.minByWeight().getName());
             history.add("min_by_weight");
         });
         addCommand("group_counting_by_nationality", (a)->{
@@ -132,6 +132,7 @@ public class CommandExecutor {
         addCommand("count_by_hair_color", (arg)->{
             int count;
             if (collection.getCollection().isEmpty()) throw new EmptyCollectionException();
+            if(arg==null) throw new MissedCommandArgumentException();
             try{
                 count = collection.countByHairColor(Color.valueOf(arg));
             } catch(IllegalArgumentException e){
@@ -148,9 +149,8 @@ public class CommandExecutor {
     public void consoleMode(){
         input = new ConsoleInput();
         run = true;
-        System.out.println(DateConverter.dateToString(collection.getTime()));
         while(run){
-            System.out.print("Enter command (enter help to get list command: ");
+            System.out.print("Enter command (enter help to get list command): ");
             CommandWrapper cmd = input.readCommand();
             runCommand(cmd.getCom(), cmd.getArg());
         }

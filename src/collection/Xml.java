@@ -1,4 +1,6 @@
 package collection;
+import data.Person;
+import inputManager.DateConverter;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -58,5 +60,26 @@ public class Xml {
             e.printStackTrace();
         }
         return returnArray;
+    }
+
+    public String strToXml(Person man){
+        return  "  <Person>\n" +
+                "       <name>" + man.getName() + "</name>\n" +
+                "       <id>" + man.getId() + "</id>\n" +
+                "       <coordinates>\n" +
+                "           <x>" + man.getCoordinates().getX() + "</x>\n" +
+                "           <y>" + man.getCoordinates().getY() + "</y>\n" +
+                "       </coordinates>\n" +
+                "       <creationDate>" + DateConverter.dateToString(man.getCreationDate()) + "</creationDate>\n" +
+                "       <height>" + man.getHeight() + "</height>\n" +
+                "       <weight>" + man.getWeight() + "</weight>\n" +
+                "       <hairColor>" + man.getHairColor()+ "</hairColor>\n" +
+                "       <nationality>" + man.getNationality() + "</nationality>\n" +
+                "       <location>\n" +
+                "           <lx>" + man.getLocation().getX() + "</lx>\n" +
+                "           <ly>" + man.getLocation().getY() + "</ly>\n" +
+                "           <lz>" + man.getLocation().getZ() + "</lz>\n" +
+                "       </location>\n"+
+                "   </Person>\n";
     }
 }
