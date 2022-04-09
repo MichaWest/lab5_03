@@ -4,6 +4,6 @@ package exceptions;
  */
 public class FileNotExistException extends FileException {
     public FileNotExistException(){
-        super("cannot find file");
+        super("не могу найти файл");
     }
 }

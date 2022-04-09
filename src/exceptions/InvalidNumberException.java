@@ -5,6 +5,6 @@ public class InvalidNumberException extends ParameterException {
         super(message);
     }
     public InvalidNumberException(){
-        super("invalid number format");
+        super("неправильно введено значение");
     }
 }

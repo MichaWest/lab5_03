@@ -42,7 +42,7 @@ public class FileWorker {
             InputStreamReader reader;
             File file = new File(path);
             if(!file.exists()) throw new FileNotExistException();
-            if(!file.canRead()) throw new FileWrongPermissionsException("cannot read file");
+            if(!file.canRead()) throw new FileWrongPermissionsException("не могу прочитать файл");
             InputStream inputStream = new FileInputStream(file);
             reader = new InputStreamReader(inputStream);
             int currentSymbol;
@@ -74,10 +74,10 @@ public class FileWorker {
             File file = new File(path);
 
             if(!file.exists()) {
-                System.out.println("file " + path +" doesn't exist, trying to create new file");
+                System.out.println("Файл " + path +" не существует, попробуйте создать новый файл");
                 create(file);
             }
-            if(!file.canWrite()) throw new FileWrongPermissionsException("cannot write file");
+            if(!file.canWrite()) throw new FileWrongPermissionsException("не могу записать в файл");
             PrintWriter writer = new PrintWriter(new FileWriter(file));
             writer.write(str);
             writer.close();
@@ -86,7 +86,7 @@ public class FileWorker {
             res = false;
         } catch (IOException e) {
             res = false;
-            System.out.println("cannot access file");
+            System.out.println("не удается получить доступ к файлу");
         }
         return res;
     }

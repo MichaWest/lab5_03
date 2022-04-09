@@ -72,7 +72,7 @@ public class InputAll {
         if(x>-119) {
             return x;
         }else{
-            throw new InvalidNumberException("x coordinate should be more than -119");
+            throw new InvalidNumberException("x должна быть больше -119");
         }
     }
 
@@ -87,7 +87,7 @@ public class InputAll {
         if(y>-119) {
             return y;
         }else{
-            throw new InvalidNumberException("y coordinate should be more than -119");
+            throw new InvalidNumberException("y должна быть больше -119");
         }
     }
 
@@ -111,7 +111,7 @@ public class InputAll {
         if(height>0){
             return height;
         }else{
-            throw new InvalidNumberException("Height should be more than 0");
+            throw new InvalidNumberException("Рост должен быть больше 0");
         }
     }
 
@@ -125,7 +125,7 @@ public class InputAll {
         if(weight>0){
             return weight;
         }else{
-            throw new InvalidNumberException("Weight should be more than 0");
+            throw new InvalidNumberException("Вес должен быть больше 0");
         }
     }
 

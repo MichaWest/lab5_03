@@ -30,7 +30,7 @@ public class CommandExecutor {
         input = new ConsoleInput();
         run = true;
         while(run){
-            System.out.print("Enter command (enter help to get list command): ");
+            System.out.print("Введите команду (введиет help, чтобы получить список комманд): ");
             CommandWrapper cmd = input.readCommand();
             runCommand(cmd.getCom(), cmd.getArg());
         }
@@ -199,6 +199,7 @@ public class CommandExecutor {
             if (!collection.checkId(id)) throw new InvalidCommandArgumentException("нет такого id");
             collection.removeById(id);
             history.add("remove_by_id");
+            System.out.println("Элемент с id "+id+" успешно удален");
         }
     }
 
@@ -225,6 +226,7 @@ public class CommandExecutor {
         public void run(String arg){
             collection.clear();
             history.add("clear");
+            System.out.println("Коллекция очищена");
         }
     }
 
@@ -233,6 +235,7 @@ public class CommandExecutor {
             if (collection.getCollection().isEmpty()) System.out.println("collection is empty");
             if(!fileWorker.write(collection.serializeCollection())) throw new CommandException("cannot save collection");
             history.add("save");
+            System.out.println("Коллекция успешно сохранена");
         }
     }
 
@@ -271,6 +274,7 @@ public class CommandExecutor {
             if (collection.getCollection().isEmpty()) throw new EmptyCollectionException();
             collection.reorder();
             history.add("reorder");
+            System.out.println("Коллекция успешно пересортировалась");
         }
     }
 

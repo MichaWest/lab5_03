@@ -73,7 +73,7 @@ public class PersonCollection {
     }
 
     public String getInfo(){
-        return "Vector of Person, size: "+collection.size()+", create time: "+ DateConverter.dateToString(this.createTime);
+        return "Vector объектов Person, количество элементов: "+collection.size()+", время создания: "+ DateConverter.dateToString(this.createTime);
     }
 
     public Vector<Person> getCollection(){
@@ -81,12 +81,10 @@ public class PersonCollection {
     }
 
     public String serializeCollection(){
-        String text = "<People>\n";
-        Xml parse = new Xml();
+        String text="";
         for (Person man : collection) {
-            text = text + parse.strToXml(man);
+            text = text + personToString(man);
         }
-        text = text + "</People>";
         return text;
     }
 
@@ -134,7 +132,6 @@ public class PersonCollection {
     }
 
     public void removeById(int i){
-        System.out.println("removeById");
         collection.removeElement(getById(i));
     }
 
@@ -143,7 +140,7 @@ public class PersonCollection {
             if (p.getId() == id){
                 newp.addId(id);
                 collection.set(collection.indexOf(getById(id)), newp);
-                System.out.println("element #"+ id +" successfully updated");
+                System.out.println("Эдемент #"+ id +" обновлен");
                 return;
             }
         }
@@ -201,6 +198,18 @@ public class PersonCollection {
             rcol.add(collection.elementAt(i));
         }
         collection = rcol;
+    }
+
+    private String personToString(Person man){
+        return man.getName()+"\n" +
+                "   id: "+man.getId()+"\n"+
+                "   координаты: ("+man.getCoordinates().getX()+";"+man.getCoordinates().getY()+")\n"+
+                "   время создания: "+DateConverter.dateToString(man.getCreationDate())+"\n"+
+                "   рост: "+man.getHeight()+"\n"+
+                "   вес: "+man.getWeight()+"\n"+
+                "   цвет волос: "+man.getHairColor()+"\n"+
+                "   национальность: "+man.getNationality()+"\n"+
+                "   локация: ("+man.getLocation().getX()+";"+man.getLocation().getY()+";"+man.getLocation().getZ()+")\n";
     }
 
 

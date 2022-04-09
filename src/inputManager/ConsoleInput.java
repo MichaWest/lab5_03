@@ -3,6 +3,7 @@ package inputManager;
 import data.*;
 import exceptions.*;
 
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class ConsoleInput extends InputAll{
@@ -26,7 +27,7 @@ public class ConsoleInput extends InputAll{
     }
 
     public String readName() throws EmptyStringException {
-        System.out.print("enter name: ");
+        System.out.print("Введите имя: ");
         return super.readName();
     }
 
@@ -41,43 +42,42 @@ public class ConsoleInput extends InputAll{
 
     @Override
     public float readXCoordinate() throws InvalidNumberException {
-        System.out.print("enter x coordinate: ");
+        System.out.print("Введите координату x(значение должно быть больше -119): ");
         return super.readXCoordinate();
     }
 
     @Override
     public float readYCoordinate() throws InvalidNumberException{
-        System.out.print("enter y coordinate: ");
+        System.out.print("Введите координату y(значение должно быть больше -119): ");
         return super.readYCoordinate();
     }
 
     @Override
-    public java.time.LocalTime readCreateTime() throws InvalidDateFormatException {
-        System.out.print("enter create time: ");
-        return super.readCreateTime();
+    public java.time.LocalTime readCreateTime() {
+        return LocalTime.now();
     }
 
     @Override
     public double readHeight() throws InvalidNumberException {
-        System.out.print("enter height: ");
+        System.out.print("Введите рост(значение должно быть больше нуля): ");
         return super.readHeight();
     }
 
     @Override
     public long readWeight() throws InvalidNumberException{
-        System.out.print("enter weight: ");
+        System.out.print("Введите вес(значение должно быть больше нуля): ");
         return super.readWeight();
     }
 
     @Override
     public Color readHairColor() throws InvalidEnumException {
-        System.out.print("enter hair color (RED, BROWN, YELLOW): ");
+        System.out.print("Введите цвет волос(Доступные цвета RED, BROWN, YELLOW): ");
         return super.readHairColor();
     }
 
     @Override
     public Country readNationality() throws InvalidEnumException {
-        System.out.print("enter nationality (USA, CHINA, VATICAN, NORTH_KOREA, JAPAN): ");
+        System.out.print("Введите национальность(Доступные национальности USA, CHINA, VATICAN, NORTH_KOREA, JAPAN): ");
         return super.readNationality();
     }
 
@@ -93,19 +93,19 @@ public class ConsoleInput extends InputAll{
 
     @Override
     public double readXLocation() throws InvalidNumberException {
-        System.out.print("enter x location: ");
+        System.out.print("Введите координату x локации: ");
         return super.readXLocation();
     }
 
     @Override
     public long readYLocation() throws InvalidNumberException{
-        System.out.print("enter y location: ");
+        System.out.print("Введите координату y локации: ");
         return super.readYLocation();
     }
 
     @Override
     public double readZLocation() throws InvalidNumberException{
-        System.out.print("enter z location: ");
+        System.out.print("Введите координату z локации: ");
         return super.readZLocation();
     }
 }
