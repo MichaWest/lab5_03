@@ -5,14 +5,19 @@ import data.*;
 import exceptions.*;
 import exceptions.ParameterException;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class InputAll {
-    private final Scanner scanner;
+    private Scanner scanner;
 
     public InputAll(Scanner sc){
         this.scanner = sc;
         scanner.useDelimiter("\n");
+    }
+
+    public void setScanner(Scanner news){
+        scanner = news;
     }
 
     public Scanner getScanner(){
@@ -20,15 +25,15 @@ public class InputAll {
     }
 
     public CommandWrapper readCommand(){
-        String command = scanner.nextLine();
-        if (command.contains(" ")){
-            String[] arr = command.split(" ",2);
-            command = arr[0];
-            String arg = arr[1];
-            return new CommandWrapper(command,arg);
-        } else {
-            return new CommandWrapper(command);
-        }
+            String command = scannerNextLine();
+            if (command.contains(" ")) {
+                String[] arr = command.split(" ", 2);
+                command = arr[0];
+                String arg = arr[1];
+                return new CommandWrapper(command, arg);
+            } else {
+                return new CommandWrapper(command);
+            }
     }
 
     public Person readPerson() throws ParameterException {
@@ -44,7 +49,7 @@ public class InputAll {
     }
 
     public String readName() throws EmptyStringException {
-        String s = scanner.nextLine().trim();
+        String s = scannerNextLine();
         if (s.isEmpty()){
             throw new EmptyStringException();
         }
@@ -60,7 +65,7 @@ public class InputAll {
     }
 
     public float readXCoordinate() throws InvalidNumberException {
-        String s = scanner.nextLine().trim();
+        String s = scannerNextLine();
         float x;
         try{
             x = Float.parseFloat(s);
@@ -75,7 +80,7 @@ public class InputAll {
     }
 
     public float readYCoordinate() throws InvalidNumberException{
-        String s = scanner.nextLine().trim();
+        String s = scannerNextLine();
         float y;
         try{
             y = Float.parseFloat(s);
@@ -90,7 +95,7 @@ public class InputAll {
     }
 
     public java.time.LocalTime readCreateTime() throws InvalidDateFormatException{
-        String s = scanner.nextLine().trim();
+        String s = scannerNextLine();
         if(s.equals("")){
             return null;
         }
@@ -102,7 +107,7 @@ public class InputAll {
     public double readHeight() throws InvalidNumberException {
         double height;
         try{
-            height = Double.parseDouble(scanner.nextLine().trim());
+            height = Double.parseDouble(scannerNextLine());
         }catch(NumberFormatException e){
             throw new InvalidNumberException();
         }
@@ -116,7 +121,7 @@ public class InputAll {
     public long readWeight() throws InvalidNumberException{
         long weight;
         try{
-            weight = Long.parseLong(scanner.nextLine().trim());
+            weight = Long.parseLong(scannerNextLine());
         }catch(NumberFormatException e){
             throw new InvalidNumberException();
         }
@@ -129,7 +134,7 @@ public class InputAll {
 
     public Color readHairColor() throws InvalidEnumException {
         try{
-            return Color.valueOf(scanner.nextLine().trim());
+            return Color.valueOf(scannerNextLine());
         } catch(IllegalArgumentException e){
             throw new InvalidEnumException();
         }
@@ -137,7 +142,7 @@ public class InputAll {
 
     public Country readNationality() throws InvalidEnumException {
         try{
-            return Country.valueOf(scanner.nextLine().trim());
+            return Country.valueOf(scannerNextLine());
         } catch(IllegalArgumentException e){
             throw new InvalidEnumException();
         }
@@ -154,7 +159,7 @@ public class InputAll {
 
     public double readXLocation() throws InvalidNumberException {
         try{
-            return Double.parseDouble(scanner.nextLine().trim());
+            return Double.parseDouble(scannerNextLine());
         }catch(NumberFormatException e){
             throw new InvalidNumberException();
         }
@@ -162,7 +167,7 @@ public class InputAll {
 
     public long readYLocation() throws InvalidNumberException{
         try{
-            return Long.parseLong(scanner.nextLine().trim());
+            return Long.parseLong(scannerNextLine());
         }catch(NumberFormatException e){
             throw new InvalidNumberException();
         }
@@ -170,9 +175,14 @@ public class InputAll {
 
     public double readZLocation() throws InvalidNumberException{
         try{
-            return Long.parseLong(scanner.nextLine().trim());
+            return Long.parseLong(scannerNextLine());
         }catch(NumberFormatException e){
             throw new InvalidNumberException();
         }
     }
+
+    protected String scannerNextLine(){
+        return scanner.nextLine().trim();
+    }
+
 }

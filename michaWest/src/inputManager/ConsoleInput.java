@@ -4,6 +4,7 @@ import data.*;
 import exceptions.*;
 
 import java.time.LocalTime;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ConsoleInput extends InputAll{
@@ -107,5 +108,19 @@ public class ConsoleInput extends InputAll{
     public double readZLocation() throws InvalidNumberException{
         System.out.print("Введите координату z локации: ");
         return super.readZLocation();
+    }
+
+    @Override
+    protected String scannerNextLine(){
+        String s;
+        try{
+            s = getScanner().nextLine().trim();
+        }catch(NoSuchElementException e) {
+            System.out.println();
+            Scanner sc = new Scanner(System.in);
+            setScanner(sc);
+            s = getScanner().nextLine().trim();
+        }
+        return s;
     }
 }
