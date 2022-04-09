@@ -1,3 +1,4 @@
+//: collection/PersonCollection.java
 package collection;
 
 import data.*;
@@ -6,13 +7,14 @@ import inputManager.DateConverter;
 
 import java.time.LocalTime;
 import java.util.*;
-
+/**Класс коллекция типd Vector для объектов Person*/
 public class PersonCollection {
     private Vector<Person> collection;
     private final java.time.LocalTime createTime;
     private HashSet<Integer> existId;
     private boolean order;
 
+    /**Конструктое PersonCollection. Определяет время создания. Порядок сортировки. И создают коллекцию по необходимости*/
     public PersonCollection(){
         createTime = LocalTime.now();
         order = true;
@@ -21,6 +23,7 @@ public class PersonCollection {
         }
     }
 
+    /**Преобразует переменную String в объекты класса, и добавляет их в коллекцию. Аргумент должен быть в формате xml*/
     public boolean deserializeCollection(String xml){
         ArrayList<String[]> col;
         try{
@@ -68,18 +71,22 @@ public class PersonCollection {
         }
     }
 
+    /**Очищает коллекцию*/
     public void clear(){
         this.collection.clear();
     }
 
+    /**Выводит информацию о коллекции. Размер и время создания*/
     public String getInfo(){
         return "Vector объектов Person, количество элементов: "+collection.size()+", время создания: "+ DateConverter.dateToString(this.createTime);
     }
 
+    /**Возврашает коллекцию Vector<Person>*/
     public Vector<Person> getCollection(){
         return collection;
     }
 
+    /**Преобразует коллекцию в строковое представление*/
     public String serializeCollection(){
         String text="";
         for (Person man : collection) {
@@ -88,10 +95,12 @@ public class PersonCollection {
         return text;
     }
 
+    /**Добавляем объект Person в коллекцию, и генерируем для него id*/
     public void add(Person p){
         add(p, generateNextId());
     }
 
+    /**Добавляем объект Person в коллекцию*/
     public void add(Person p, int id){
         p.addId(id);
         if(collection.isEmpty()) {
@@ -117,10 +126,12 @@ public class PersonCollection {
         }
     }
 
+    /**Проверяем если ли объект с id i в коллекции. Если есть возвращаем true, иначе false*/
     public boolean checkId(int i){
         return collection.contains(getById(i));
     }
 
+    /**Возвращает объект Person из коллекции по id. Если такого объекта нет возвращает null*/
     public Person getById(int i){
         for(Person p: collection){
             if(p.getId() == i){
@@ -131,10 +142,12 @@ public class PersonCollection {
         return null;
     }
 
-    public void removeById(int i){
-        collection.removeElement(getById(i));
+    /**Удаляет объект с id равным i. Если этот объект был в коллекции, то он будет удален и будет возвращено true, иначе false*/
+    public boolean removeById(int i){
+        return collection.removeElement(getById(i));
     }
 
+    /**Обновляем поля объекта Person с id равным i*/
     public void updateById(int id, Person newp){
         for (Person p : collection){
             if (p.getId() == id){
@@ -146,10 +159,12 @@ public class PersonCollection {
         }
     }
 
+    /**Удаляем элемент который находится на позиции number*/
     public void remove(int number){
         collection.remove(number);
     }
 
+    /**Возвращает объект Person с минимальным весом в коллекции*/
     public Person minByWeight(){
         Long minW;
         Person rp = null;
@@ -163,6 +178,7 @@ public class PersonCollection {
         return rp;
     }
 
+    /**Возвращает коллекцию объектов Person с национальностью Country n*/
     public PersonCollection groupByNationality(Country n){
         PersonCollection r = new PersonCollection();
         for(Person p :collection){
@@ -173,6 +189,7 @@ public class PersonCollection {
         return r;
     }
 
+    /**Выводить имена и id и объектов коллекции*/
     public String printCollection(){
         String text ="";
         for(Person p: collection){
@@ -181,6 +198,7 @@ public class PersonCollection {
         return text;
     }
 
+    /**Возвращает количество объектов Person с цветом волос Color c*/
     public int countByHairColor(Color c){
         int count = 0;
         for(Person p: collection){
@@ -191,6 +209,7 @@ public class PersonCollection {
         return count;
     }
 
+    /**Меняем порядок сортировки элементов в коллекции*/
     public void reorder(){
         order = !order;
         Vector<Person> rcol = new Vector<>();
@@ -200,6 +219,7 @@ public class PersonCollection {
         collection = rcol;
     }
 
+    /**Возвращаем объект Person в строковом представлении. Со всеми полями*/
     private String personToString(Person man){
         return man.getName()+"\n" +
                 "   id: "+man.getId()+"\n"+
