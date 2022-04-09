@@ -7,8 +7,6 @@ import exceptions.ParameterException;
 
 import java.util.Scanner;
 
-import static inputManager.DateConverter.parseLocalDate;
-
 public class InputAll {
     private final Scanner scanner;
 
