@@ -13,7 +13,7 @@ public class CommandExecutor {
     private InputAll input;
     private final FileWorker fileWorker;
     private boolean run;
-    private final Stack<String> runFiles;
+    private static Stack<String> runFiles = new Stack<>();
     private final List<String> history;
     private String currentScriptFileName;
     private final String[] commands= {"help","info", "show", "add", "remove_by_id", "update_by_id", "clear", "save", "execute_script", "exit", "remove_first", "reorder", "history", "group_counting_by_nationality", "count_by_hair_color" };
@@ -22,7 +22,6 @@ public class CommandExecutor {
         this.collection = cManager;
         this.input = iManager;
         this.fileWorker = fManager;
-        runFiles = new Stack<>();
         history = new ArrayList<>();
     }
 
@@ -241,16 +240,19 @@ public class CommandExecutor {
 
     public class ExecuteScript implements Command{
         public void run(String arg) throws RecursiveException {
-            if(arg==null||arg.isEmpty()){
-                throw new MissedCommandArgumentException();
+            try {
+                if (arg == null || arg.isEmpty()) {
+                    throw new MissedCommandArgumentException();
+                }
+                if (runFiles.contains(arg)) throw new RecursiveException();
+                runFiles.push(arg);
+                CommandExecutor process = new CommandExecutor(collection, input, fileWorker);
+                process.fileMode(arg);
+                runFiles.pop();
+                history.add("execute_script");
+            } catch(RecursiveException e){
+                System.out.println(e.getMessage());
             }
-            if(runFiles.contains(arg)) throw new RecursiveException();
-            runFiles.push(currentScriptFileName);
-            CommandExecutor process = new CommandExecutor(collection, input, fileWorker);
-            process.fileMode(arg);
-            runFiles.pop();
-            System.out.println("successfully executed script " + arg);
-            history.add("execute_script");
         }
     }
 
